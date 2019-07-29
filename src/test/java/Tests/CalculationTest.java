@@ -24,9 +24,9 @@ public class CalculationTest {
     public void itShouldCalculateTotalIncome() {
         //1. vybrat fond, sumu, rok, email
         selectFund("Death Star real estate");
-        driver.findElement(By.id("oneTimeInvestmentInput")).sendKeys("1500");
-        driver.findElement(By.id("yearsInput")).sendKeys("39");
-        driver.findElement(By.id("emailInput")).sendKeys("test@test.sk");
+        investInput("20000");
+        yearsInput("24");
+        emailInput("nie2@nie.sk");
         driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p"));
         Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText().isEmpty());
         Assert.assertTrue(driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText().contains("kr"));
@@ -36,9 +36,9 @@ public class CalculationTest {
     public void itShouldCalculateInterestIncome() {
         //1. vybrat fond, sumu, rok, email
         selectFund("Death Star real estate");
-        driver.findElement(By.id("oneTimeInvestmentInput")).sendKeys("1500");
-        driver.findElement(By.id("yearsInput")).sendKeys("39");
-        driver.findElement(By.id("emailInput")).sendKeys("test@test.sk");
+        investInput("4500");
+        yearsInput("55");
+        emailInput("nie3@nie.sk");
         driver.findElement(By.cssSelector("div.result > div:nth-child(2) > p"));
         Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(2) > p")).getText().isEmpty());
     }
@@ -54,25 +54,47 @@ public class CalculationTest {
         Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(3) > p")).getText().isEmpty());
     }
 
+    @Test
+    public void itShouldCalculateTotalIncomeForEachFund(){
+        String[] arrayOfFunds = {"Death Star real estate", "Tom & Jerry corp", "Batman's Cave Development",
+                "McDuck's safe", "Fellowship investment group", "Hoggwart's Fund", "Handelsbanken Aktiv 100"};
+        for (String a : arrayOfFunds) {
+            selectFund(a);
+            investInput("1500");
+            yearsInput("25");
+            emailInput("nie@nie.sk");
+            Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText().isEmpty());
+            Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(2) > p")).getText().isEmpty());
+            Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(3) > p")).getText().isEmpty());
+            Assert.assertTrue(driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText().contains("kr"));
+            Assert.assertTrue(driver.findElement(By.cssSelector("div.result > div:nth-child(2) > p")).getText().contains("kr"));
+
+
+        }
+    }
+
     private void selectFund(String fundToSelect){
         new Select(driver.findElement(By.id("fundSelect"))).selectByVisibleText(fundToSelect);
     }
 
     private void investInput(String investInput){
+        driver.findElement(By.id("oneTimeInvestmentInput")).clear();
         driver.findElement(By.id("oneTimeInvestmentInput")).sendKeys(investInput);
     }
 
     private void yearsInput(String yearsInput){
+        driver.findElement(By.id("yearsInput")).clear();
         driver.findElement(By.id("yearsInput")).sendKeys(yearsInput);
     }
 
     private void emailInput(String emailInput){
+        driver.findElement(By.id("emailInput")).clear();
         driver.findElement(By.id("emailInput")).sendKeys(emailInput);
     }
 
     @After
     public void tearDown() {
-        driver.close();
-        driver.quit();
+        //driver.close();
+        //driver.quit();
     }
 }
