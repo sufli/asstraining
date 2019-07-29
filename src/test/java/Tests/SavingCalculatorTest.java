@@ -14,7 +14,7 @@ public class SavingCalculatorTest {
     WebDriver driver;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://localhost/savingscalculator.php");
@@ -31,7 +31,7 @@ public class SavingCalculatorTest {
     }
 
     @Test
-    public void itShouldEnableApplyButton(){
+    public void itShouldEnableApplyButton() {
         //1. vybrat fond
         new Select(driver.findElement(By.id("fundSelect"))).selectByVisibleText("Hoggwart's Fund");
         //2.zadat sumu
@@ -43,9 +43,19 @@ public class SavingCalculatorTest {
         //5.overit button
         Assert.assertTrue(driver.findElement(By.cssSelector("button.btn-block")).isEnabled());
     }
+
+    @Test
+    public void itShouldnotSelectAnyFundOnPageOpen() {
+        new Select(driver.findElement(By.id("fundSelect"))).getFirstSelectedOption().getText();
+        //System.out.println(new Select(driver.findElement(By.id("fundSelect"))).getFirstSelectedOption().getText());
+        Assert.assertEquals("Select your fund",
+                new Select(driver.findElement(By.id("fundSelect"))).getFirstSelectedOption().getText());
+
+    }
+
     @After
-    public void tearDown(){
-        driver.close();
-        driver.quit();
+    public void tearDown() {
+        //driver.close();
+        //driver.quit();
     }
 }
