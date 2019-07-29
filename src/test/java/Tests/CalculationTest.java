@@ -19,6 +19,7 @@ public class CalculationTest {
         driver = new ChromeDriver();
         driver.get("http://localhost/savingscalculator.php");
     }
+
     @Test
     public void itShouldCalculateTotalIncome() {
         //1. vybrat fond, sumu, rok, email
@@ -28,7 +29,7 @@ public class CalculationTest {
         driver.findElement(By.id("emailInput")).sendKeys("test@test.sk");
         driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p"));
         Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText().isEmpty());
-
+        Assert.assertTrue(driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText().contains("kr"));
     }
 
     @Test
@@ -52,6 +53,7 @@ public class CalculationTest {
         driver.findElement(By.cssSelector("div.result > div:nth-child(3) > p"));
         Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(3) > p")).getText().isEmpty());
     }
+
     @After
     public void tearDown() {
         driver.close();
