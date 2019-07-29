@@ -63,16 +63,23 @@ public class CalculationTest {
             investInput("1500");
             yearsInput("25");
             emailInput("nie@nie.sk");
-            Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText().isEmpty());
-            Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(2) > p")).getText().isEmpty());
-            Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(3) > p")).getText().isEmpty());
-            Assert.assertTrue(driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText().contains("kr"));
-            Assert.assertTrue(driver.findElement(By.cssSelector("div.result > div:nth-child(2) > p")).getText().contains("kr"));
-
-
+            Assert.assertFalse(getToatalIncome().isEmpty());
+            Assert.assertFalse(getToatalIncome2().isEmpty());
+            Assert.assertFalse(getToatalIncome3().isEmpty());
+            Assert.assertTrue(getToatalIncome().contains("kr"));
+            Assert.assertTrue(getToatalIncome2().contains("kr"));
         }
     }
 
+    private String getToatalIncome(){
+        return driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText();
+    }
+    private String getToatalIncome2(){
+        return driver.findElement(By.cssSelector("div.result > div:nth-child(2) > p")).getText();
+    }
+    private String getToatalIncome3(){
+        return driver.findElement(By.cssSelector("div.result > div:nth-child(3) > p")).getText();
+    }
     private void selectFund(String fundToSelect){
         new Select(driver.findElement(By.id("fundSelect"))).selectByVisibleText(fundToSelect);
     }
