@@ -1,24 +1,12 @@
 package Tests;
 
-import org.junit.After;
+import base.TestBase;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class SavingCalculatorTest {
-
-    WebDriver driver;
-
-    @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.get("http://localhost/savingscalculator.php");
-    }
+public class SavingCalculatorTest extends TestBase {
 
     @Test
     public void itShouldDisplayTitle() {
@@ -47,15 +35,10 @@ public class SavingCalculatorTest {
     @Test
     public void itShouldnotSelectAnyFundOnPageOpen() {
         new Select(driver.findElement(By.id("fundSelect"))).getFirstSelectedOption().getText();
-        //System.out.println(new Select(driver.findElement(By.id("fundSelect"))).getFirstSelectedOption().getText());
+        System.out.println(new Select(driver.findElement(By.id("fundSelect"))).getFirstSelectedOption().getText());
         Assert.assertEquals("Select your fund",
                 new Select(driver.findElement(By.id("fundSelect"))).getFirstSelectedOption().getText());
-
     }
 
-    @After
-    public void tearDown() {
-        //driver.close();
-        //driver.quit();
-    }
+
 }
