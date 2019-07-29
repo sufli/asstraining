@@ -27,9 +27,9 @@ public class CalculationTest {
         investInput("20000");
         yearsInput("24");
         emailInput("nie2@nie.sk");
-        driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p"));
-        Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText().isEmpty());
-        Assert.assertTrue(driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p")).getText().contains("kr"));
+        //driver.findElement(By.cssSelector("div.result > div:nth-child(1) > p"));
+        Assert.assertFalse(getToatalIncome().isEmpty());
+        Assert.assertTrue(getToatalIncome().contains("kr"));
     }
 
     @Test
@@ -39,8 +39,8 @@ public class CalculationTest {
         investInput("4500");
         yearsInput("55");
         emailInput("nie3@nie.sk");
-        driver.findElement(By.cssSelector("div.result > div:nth-child(2) > p"));
-        Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(2) > p")).getText().isEmpty());
+       // driver.findElement(By.cssSelector("div.result > div:nth-child(2) > p"));
+        Assert.assertFalse(getToatalIncome2().isEmpty());
     }
 
     @Test
@@ -50,8 +50,8 @@ public class CalculationTest {
         investInput("1500");
         yearsInput("25");
         emailInput("nie@nie.sk");
-        driver.findElement(By.cssSelector("div.result > div:nth-child(3) > p"));
-        Assert.assertFalse(driver.findElement(By.cssSelector("div.result > div:nth-child(3) > p")).getText().isEmpty());
+        //driver.findElement(By.cssSelector("div.result > div:nth-child(3) > p"));
+        Assert.assertFalse(getToatalIncome3().isEmpty());
     }
 
     @Test
