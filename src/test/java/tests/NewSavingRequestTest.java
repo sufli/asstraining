@@ -3,9 +3,12 @@ import base.TestBase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import pages.CalculatorPage;
+import utils.MathUtils;
+
 public class NewSavingRequestTest extends TestBase {
+
+
     @Test
     public void itShouldDisplayTotalIncomeInNewRequest() {
         String fundToSelect = "Death Star real estate";
@@ -49,8 +52,23 @@ public class NewSavingRequestTest extends TestBase {
         System.out.println(driver.findElement(By.xpath("//p[contains(@class, 'fund-description')]")).getText());
 
         Assert.assertEquals(displayFund, fundToSelect );
-
     }
-
-
+        @Test
+           public void itShouldDisplayTwentyRequests() {
+            CalculatorPage calculatorPage = new CalculatorPage(driver);
+            for (int i = 0; i < 20 ; i++) {
+                String fundToSelect = "Tom & Jerry corp";
+                calculatorPage.selectFund(fundToSelect);
+                calculatorPage.investInput(String.valueOf(MathUtils.getRandomNumberInRange(10,10000)));
+                calculatorPage.yearsInput(String.valueOf(MathUtils.getRandomNumberInRange(1,10)));
+                calculatorPage.emailInput("ale@podme.sk");
+                calculatorPage.submitRequest();
+            }
+            driver.findElements(By.cssSelector("ul.saving-list > li > div.saving-detail"));
+            Assert.assertEquals(20,  driver.findElements(By.cssSelector("ul.saving-list > li > div.saving-detail")).size());
+    }
 }
+
+
+
+
