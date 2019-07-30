@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
+import pages.CalculatorPage;
 
 public class SavingCalculatorTest extends TestBase {
 
@@ -21,7 +22,8 @@ public class SavingCalculatorTest extends TestBase {
     @Test
     public void itShouldEnableApplyButton() {
         //1. vybrat fond
-        new Select(driver.findElement(By.id("fundSelect"))).selectByVisibleText("Hoggwart's Fund");
+        CalculatorPage calculatorPage = new CalculatorPage(driver);
+        calculatorPage.selectFund("Hoggwart's Fund");
         //2.zadat sumu
         driver.findElement(By.id("oneTimeInvestmentInput")).sendKeys("1500");
         //3.zadat pocet rokov
