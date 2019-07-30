@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 import base.TestBase;
 import org.junit.Assert;

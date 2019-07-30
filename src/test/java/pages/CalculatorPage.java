@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class CalculatorPage {
@@ -40,5 +41,8 @@ public class CalculatorPage {
 
     public void submitRequest(){
         pageDriver.findElement(By.cssSelector("button.btn-block")).click();
+    }
+    public WebElement prvacastcestynawebe(String s) {
+        return pageDriver.findElement(By.cssSelector(s));
     }
 }
